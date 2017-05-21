@@ -1,0 +1,29 @@
+{
+  "name": "webdriverio-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YeisonGomez/webdriverio-demo.git"
+  },
+  "author": "Yeison Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YeisonGomez/webdriverio-demo/issues"
+  },
+  "homepage": "https://github.com/YeisonGomez/webdriverio-demo#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "cheerio": "^0.22.0",
+    "phantomjs-prebuilt": "^2.1.14",
+    "webdriverio": "^4.8.0"
+  }
+}
