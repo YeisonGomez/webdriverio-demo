@@ -28,14 +28,34 @@ Para el uso de PhantomJS instalar:
 $ npm install -g phantomjs
 ```
 
+## Ejecución #
+
 Abrir el navegador web y acceder a la siguiente dirección:
 
- - http://localhost:7070/google?q=webdriverio&browser=phantom
- - http://localhost:7070/chaira?user=p.prueba&password=123&browser=chrome
+#### `http://localhost:7070/google?q=webdriverio&browser=phantom`
 
-El parametro **browser** es opcional, por defecto se ejecuta con Chrome.
-Donde **p.prueba** es el nombre de usuario, y **123** es la contraseña correspondiente a la cuenta de [Chaira](https://chaira.udla.edu.co/Chaira/Logon.aspx).
+ ##### Parametros
 
+| Parametro                | Descripción
+| ------------------------ | ---------------------------------------------------------------------------------------
+| **q**                    | Parametro que se quiere buscar.
+| **browser** *(opcional)* | Seleccionar el navegador donde se ejecutara (phantom, chrome).
+
+##### Retorna
+
+- Lista solo las URL's que el buscador de google devuelve
+
+#### `http://localhost:7070/chaira?user=p.prueba&password=123&browser=chrome`
+
+| Parametro                | Descripción
+| ------------------------ | ---------------------------------------------------------------------------------------
+| **user**                 | Usuario Chairá.
+| **password**             | Contraseña Chairá.
+| **browser** *(opcional)* | Seleccionar el navegador donde se ejecutara (phantom, chrome).
+
+##### Retorna
+
+- Un string donde verifica si el usuario es correcto.
 
 # Contribuir #
 Realiza un Fork de este proyecto y contribuye. **[git](http://rogerdudler.github.io/git-guide/index.es.html)**
