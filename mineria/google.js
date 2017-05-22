@@ -18,14 +18,35 @@ module.exports.buscar = function(param, callback) {
             console.log("Problema al ejecutar chromedriver");
         })
         .url('https://www.google.com.co')
-        .setValue('*[name="q"]','webdriverio')
-    	.click('*[name="btnG"]')
-    	.then(function() {
+        .setValue('*[name="q"]', param)
+        .click('*[name="btnG"]')
+        .then(function() {
             console.log("Buscando....");
         })
-    	.pause(1000)
-        //.addValue('#txt_password', password)
-    //});
+        .pause(2000)
+        .elements('//h3[@class="r"]//a')
+        .then(function(e) {
+            //console.log(e);
+            getUrlResult(e.value, 0, [], function(urls) {
+                client.end();
+                callback(urls);
+            });
+        })
+        //});
 };
 
-//document.getElementsByName('q')[0].value = "HOLA"
+function getUrlResult(array, i, save, callback) {
+    if (i < array.length) {
+        client.elementIdAttribute(array[i].ELEMENT, 'href')
+            .then(function(d) {
+                //console.log(d);
+                save.push(d.value);
+                getUrlResult(array, i + 1, save, callback);
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+    } else {
+        callback(save);
+    }
+}

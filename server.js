@@ -18,8 +18,9 @@ server.get('/chaira', function(req, res){
 
 server.get('/google', function(req, res){
 	mineria.google.buscar(req.query.q, function(param1){
+		console.log("Resultado");
 		console.log(param1);
-		res.json("Todo bien");
+		res.json(param1);
 	});
 });
 

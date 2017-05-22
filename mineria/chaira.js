@@ -25,7 +25,8 @@ module.exports.loginChaira = function(user, password, callback) {
             validLogin(function(res) {
                 callback(res);
             });
-        });
+        })
+        .end();
     //});
 };
 
@@ -39,23 +40,17 @@ var validLogin = function(callback) {
         .then(function(url) {
             if (url == "https://chaira.udla.edu.co/Chaira/Logon.aspx" && time < 10) {
                 client.getAttribute('#txt_password', 'value').then(function(res) { //Usuario invalido
-                    if (res === "") {
-                        client.isExisting('//div[@class="sa-icon sa-warning pulseWarning"]').then(function(passwordInvalid) { //Contraseña invalida
-                            if (passwordInvalid) {
-                                callback("La contraseña es incorrecta");
-                            } else {
+                    client.isExisting('//div[@class="sa-icon sa-warning pulseWarning"]').then(function(passwordInvalid) { //Contraseña invalida
+                        if (passwordInvalid) {
+                            callback("La contraseña es incorrecta");
+                        } else {
+                            if (res === "") {
                                 callback("El usuario es incorrecto");
-                            }
-                        });
-                    } else {
-                        client.isExisting('//div[@class="sa-icon sa-warning pulseWarning"]').then(function(passwordInvalid) { //Contraseña invalida
-                            if (passwordInvalid) {
-                                callback("La contraseña es incorrecta");
                             } else {
                                 return validLogin(callback);
                             }
-                        });
-                    }
+                        }
+                    });
                 });
             } else if (time >= 10) {
                 callback("La conexión con el servidor ha superado el tiempo de espera máximo.");
