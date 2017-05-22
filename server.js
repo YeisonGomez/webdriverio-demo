@@ -10,10 +10,15 @@ var server      = express();
 var mineria = require('./mineria/index.js');
 
 server.get('/chaira', function(req, res){
-	mineria.chaira.login(req.query.user, req.query.password, function(param1, param2, param3){
+	mineria.chaira.login(req.query.user, req.query.password, function(param1){
 		console.log(param1);
-		console.log(param2);
-		console.log(param3);
+		res.json(param1);
+	});
+});
+
+server.get('/google', function(req, res){
+	mineria.google.buscar(req.query.q, function(param1){
+		console.log(param1);
 		res.json("Todo bien");
 	});
 });
