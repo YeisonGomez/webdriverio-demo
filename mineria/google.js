@@ -1,17 +1,27 @@
 var webdriverio = require('webdriverio');
-var phantomjs = require('phantomjs-prebuilt')
+var phantomjs = require('phantomjs-prebuilt');
 var options = {
-    desiredCapabilities: {
-        host: "localhost",
-        port: 4444,
-        desiredCapabilities: { browserName: "chrome" }
+    host: "localhost",
+    port: 4444,
+    desiredCapabilities: { browserName: "chrome" }
+};
+
+var client = undefined;
+
+module.exports.buscar = function(param, b, callback) {
+    console.log('Buscando: ' + param);
+    options.desiredCapabilities.browserName = (b)? b : 'chrome';
+    client = webdriverio.remote(options);
+    if (b == 'phantom') {
+        phantomjs.run('--webdriver=4444').then(function(program) {
+            goSearch(param, callback);
+        });
+    } else {
+        goSearch(param, callback);
     }
 };
-var client = webdriverio.remote(options);
 
-module.exports.buscar = function(param, callback) {
-    console.log('Buscando: ' + param);
-    //phantomjs.run('--webdriver=4444').then(function(program) {
+function goSearch(param, callback) {
     client
         .init().catch(function(err) {
             console.log(err);
@@ -32,8 +42,7 @@ module.exports.buscar = function(param, callback) {
                 callback(urls);
             });
         })
-        //});
-};
+}
 
 function getUrlResult(array, i, save, callback) {
     if (i < array.length) {

@@ -1,17 +1,28 @@
 var webdriverio = require('webdriverio');
-var phantomjs = require('phantomjs-prebuilt')
+var phantomjs = require('phantomjs-prebuilt');
 var options = {
-    desiredCapabilities: {
-        host: "localhost",
-        port: 4444,
-        desiredCapabilities: { browserName: "chrome", 'phantomjs.page.settings.loadImages': false }
-    }
+    host: "localhost",
+    port: 4444,
+    desiredCapabilities: { browserName: "chrome" }
 };
-var client = webdriverio.remote(options);
 
-module.exports.loginChaira = function(user, password, callback) {
+var client = undefined;
+
+module.exports.loginChaira = function(user, password, b, callback) {
     console.log(user);
-    //phantomjs.run('--webdriver=4444').then(function(program) {
+    options.desiredCapabilities.browserName = (b)? b : 'chrome';
+    client = webdriverio.remote(options);
+    if (b == 'phantom') {
+        phantomjs.run('--webdriver=4444').then(function(program) {
+            goLogin(user, password, callback);
+        });
+    } else {
+        goLogin(user, password, callback);
+    }
+
+};
+
+function goLogin(user, password, callback) {
     client
         .init().catch(function(err) {
             console.log(err);
@@ -27,10 +38,8 @@ module.exports.loginChaira = function(user, password, callback) {
                 callback(res);
             });
         });
-    //});
-};
+}
 
-//PROPIAS
 var time = 0;
 var validLogin = function(callback) {
     time++;

@@ -10,24 +10,31 @@
 ```bash
 $ git clone https://github.com/YeisonGomez/webdriverio-demo.git
 $ cd webdriverio-demo
-$ ./chromedriver --url-base=/wd/hub --port=4444
-```
-
-En otra pestaña
-
-```bash
 $ npm install
 $ npm start
 ...
 Servidor corriendo
 ```
 
+Para el uso de Chrome ejecutar en otra pestaña de terminal:
+
+```bash
+$ ./chromedriver --url-base=/wd/hub --port=4444
+```
+
+Para el uso de PhantomJS instalar:
+
+```bash
+$ npm install -g phantomjs
+```
+
 Abrir el navegador web y acceder a la siguiente dirección:
 
- - http://localhost:7070/google?q=webdriverio
- - http://localhost:7070/chaira?user=p.prueba&password=123
+ - http://localhost:7070/google?q=webdriverio&browser=phantom
+ - http://localhost:7070/chaira?user=p.prueba&password=123&browser=chrome
 
-Donde **p.prueba** es el nombre de usuario, y **123** es la contraseña correspondiente a la cuenta de [Chaira](https://chaira.udla.edu.co/Chaira/Logon.aspx)
+El parametro **browser** es opcional, por defecto se ejecuta con Chrome.
+Donde **p.prueba** es el nombre de usuario, y **123** es la contraseña correspondiente a la cuenta de [Chaira](https://chaira.udla.edu.co/Chaira/Logon.aspx).
 
 
 # Contribuir #
