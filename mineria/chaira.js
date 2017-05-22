@@ -4,7 +4,7 @@ var options = {
     desiredCapabilities: {
         host: "localhost",
         port: 4444,
-        desiredCapabilities: { browserName: "chrome" }
+        desiredCapabilities: { browserName: "chrome", 'phantomjs.page.settings.loadImages': false }
     }
 };
 var client = webdriverio.remote(options);
@@ -23,10 +23,10 @@ module.exports.loginChaira = function(user, password, callback) {
         .click("#btn_ingresar").then(function() {
             console.log("Login....");
             validLogin(function(res) {
+                client.end();
                 callback(res);
             });
-        })
-        .end();
+        });
     //});
 };
 
